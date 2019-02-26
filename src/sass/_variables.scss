@@ -1,0 +1,87 @@
+
+$duration:                     .5s;
+$base-unit:                    16px;
+
+$sans-font-family:              'Roboto', sans-serif;
+$base-font-family:              $sans-font-family;
+$base-font-color:               #596377;
+$base-line-height:              1.5;
+$base-font-size:                3rem;
+
+
+$specter:                       #ECF0F1;
+
+$barcamp-colors: (
+  'teen-party--primary':       #cc208e, 
+  'teen-party--secondary':     #6713d2,
+  'midnight':                  #2A2E39,
+  'specter':                   #ECF0F1
+);
+
+@function barcamp-color($key: 'primary') {
+  @return map-get($barcamp-colors, $key);
+}
+
+$teen-party:                      linear-gradient(to top, barcamp-color('teen-party--primary') 0%, barcamp-color('teen-party--secondary') 100%);
+$cotton-candy:                    linear-gradient(to right, #00dbde 0%, #fc00ff 100%);
+$sunset:                          linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);
+$mist:                            linear-gradient(60deg, #3d3393 0%, #2b76b9 37%, #2cacd1 65%, #35eb93 100%);
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D"
+  );
+  $new: $string;
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+  @return $new;
+}
+
+@function inline-svg($string) {
+  @return url('data:image/svg+xml;charset=utf-8,#{url-encode($string)}');
+}
+
+@mixin hide-text {
+  font-size: 0px;
+  line-height: 1;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+
+
+
+

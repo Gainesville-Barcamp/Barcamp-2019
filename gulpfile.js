@@ -1,119 +1,156 @@
+/**
+ * Paths to project folders
+ */
 
-var gulp          = require('gulp');
-var gutil         = require('gulp-util');
-var watch         = require('gulp-watch');
-var livereload    = require('gulp-livereload');
-var sass          = require('gulp-sass');
-var autoprefixer  = require('gulp-autoprefixer');
-var minifycss     = require('gulp-minify-css');
-var uglify        = require('gulp-uglify');
-var concat        = require('gulp-concat');
-var imagemin      = require('gulp-imagemin');
-var changed       = require('gulp-changed');
-var cache         = require('gulp-cache');
-var connect       = require('gulp-connect');
-var notify        = require('gulp-notify');
-var rename        = require('gulp-rename');
-var fileinclude   = require('gulp-file-include');
-var del           = require('del');
-var plumber       = require('gulp-plumber');
+var paths = {
+	input: 'src/',
+	output: 'dist/',
+	scripts: {
+		input: 'src/js/*',
+		output: 'dist/assets/js/'
+	},
+	styles: {
+		input: 'src/sass/**/*.{scss,sass}',
+		output: 'dist/assets/css/'
+	},
+	images: {
+		input: 'src/images/*',
+		output: 'dist/assets/images/'
+	},
+	views: {
+		input: 'src/views/**/*',
+		output: 'dist/'
+	},
+	reload: './dist/'
+};
 
-
-var onError = function(err) {
-  console.log(err);
-}
-
-gulp.task('webserver', function() {
-  connect.server({
-    livereload: true
-  });
-});
-
-//Partials
-
-gulp.task('fileinclude', function() {
-  gulp.src('./src/views/*.tpl.html')
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(fileinclude({ prefix: '@@'}))
-    .pipe(rename({ extname: "" }))
-    .pipe(rename({ extname: ".html" }))
-    .pipe(gulp.dest('./'))
-    .pipe(livereload())
-    .pipe(notify({ message: 'File include task complete' }));
-});
+var { gulp, src, dest, watch, series, parallel} = require('gulp');
+var del = require("del");
+var rename = require("gulp-rename");
+var newer = require("gulp-newer");
+var fileinclude = require('gulp-file-include');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 
 //Styles
-
-gulp.task('sass', function () {
-  gulp.src('./src/scss/**/*.scss')
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(sass({ style: 'expanded', }))
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('./assets/stylesheets'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(minifycss())
-    .pipe(gulp.dest('./assets/stylesheets'))
-    .pipe(livereload())
-    .pipe(notify({ message: 'Sass task complete' }));
-});
-
-//JS
-
-gulp.task('js', function() {
-  gulp.src('./src/javascripts/*.js')
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(concat('application.js'))
-    .pipe(gulp.dest('./assets/javascripts'))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest('./assets/javascripts'))
-    .pipe(livereload())
-    .pipe(notify({ message: 'Scripts task complete' }));
-});
+var sass = require('gulp-sass');
+var prefix = require('gulp-autoprefixer');
+var minify = require('gulp-cssnano');
 
 //Images
+var imagemin = require("gulp-imagemin");
 
-gulp.task('images', function() {
-  var imgSrc = './src/images/**/*',
-      imgDst = './assets/images';
-  gulp.src(imgSrc)
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(changed(imgDst))
-    .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-    .pipe(gulp.dest(imgDst))
-    .pipe(livereload())
-    .pipe(notify({ message: 'Images task complete' }));
-});
+// BrowserSync
+var browserSync = require('browser-sync');
+
+// Remove pre-existing content from output folders
+var cleanDist = function(done) {
+	del.sync([
+		paths.output
+	]);
+	done();
+};
+
+// Process, lint, and, minify Sass files
+var processStyles = function(done) {
+	src(paths.styles.input)
+		.pipe(sass({
+			outputStyle: 'expanded',
+			sourceComments: true
+		}))
+		.pipe(prefix({
+			browsers: ['last 2 version', '> 0.25%'],
+			cascade: true,
+			remove: true
+		}))
+		.pipe(dest(paths.styles.output))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(minify({
+			discardComments: {
+				removeAll: true
+			}
+		}))
+		.pipe(dest(paths.styles.output));
+	done();
+};
+
+// Optimize Images
+var processImages = function(done) {
+  src(paths.images.input)
+  .pipe(newer(paths.images.output))
+  .pipe(imagemin({
+    interlaced: true,
+    progressive: true,
+    optimizationLevel: 5,
+    svgoPlugins: [
+      {
+        removeViewBox: true
+      }
+    ]
+  }))
+  .pipe(dest(paths.images.output));
+  done();
+};
+
+//Minify, and concatenate scripts
+var processScripts = function(done) {
+  src(paths.scripts.input)
+    .pipe(concat('application.js'))
+    .pipe(dest(paths.scripts.output))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(dest(paths.scripts.output));
+    done();
+};
+
+//Process partials, copy views
+var processPartials = function(done) {
+  src('./src/views/*.tpl.html')
+  .pipe(fileinclude({ prefix: '@@'}))
+  .pipe(rename({ extname: "" }))
+  .pipe(rename({ extname: ".html" }))
+  .pipe(dest(paths.views.output));
+  done();
+};
+
+// Watch for changes to the src directory
+var startServer = function(done) {
+	browserSync.init({
+		server: {
+			baseDir: paths.reload
+		}
+	});
+	done();
+};
+
+// Reload the browser when files change
+var reloadBrowser = function(done) {
+	browserSync.reload();
+	done();
+};
+
+// Watch for changes
+var watchSource = function(done) {
+	watch(paths.input, series(exports.default, reloadBrowser));
+	done();
+};
 
 // Default task
+// gulp
+exports.default = series(
+	cleanDist,
+	parallel(
+    processStyles,
+    processImages,
+    processScripts,
+    processPartials
+	)
+);
 
-gulp.task('default', function() {
-  gulp.start('fileinclude', 'sass', 'js', 'images', 'watch', 'webserver');
-});
-
-// Watch
-gulp.task('watch', function() {
-
-  // Create LiveReload server
-  livereload.listen();
-
-  // Watch .scss files
-  gulp.watch('./src/scss/**/*.scss', ['sass']);
-
-  // Watch .js files
-  gulp.watch('./src/javascripts/*.js', ['js']);
-
-  // Watch image files
-  gulp.watch('.src/images/**/*', ['images']);
-
-  // watch task for gulp-file-include
-  gulp.watch('./src/views/*.html', ['fileinclude']);
-
-  // Watch any files in assets/, reload on change
-  gulp.watch(['.assets/**/*']).on('change', livereload.changed);
-});
-
-// Build for Deploy
-gulp.task('build', function() {
-  gulp.start('fileinclude', 'sass', 'js', 'images');
-});
+// Watch and reload
+// gulp watch
+exports.watch = series(
+	exports.default,
+	startServer,
+	watchSource
+);
