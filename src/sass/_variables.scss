@@ -1,7 +1,5 @@
 
-$duration:                     .5s;
 $base-unit:                    16px;
-
 $sans-font-family:              'Roboto', sans-serif;
 $base-font-family:              $sans-font-family;
 $base-font-color:               #596377;
@@ -12,20 +10,30 @@ $base-font-size:                3rem;
 $specter:                       #ECF0F1;
 
 $barcamp-colors: (
-  'teen-party--primary':       #cc208e, 
-  'teen-party--secondary':     #6713d2,
-  'midnight':                  #2A2E39,
-  'specter':                   #ECF0F1
+  'teen-party--primary':         #cc208e, 
+  'teen-party--secondary':       #6713d2,
+  'cotton-candy--primary':       #00dbde, 
+  'cotton-candy--secondary':     #fc00ff,
+  'sunset--primary':             #231557, 
+  'sunset--secondary':           #44107A,
+  'sunset--tertiary':            #FF1361, 
+  'sunset--quaternary':          #FFF800,
+  'mist--primary':               #3d3393, 
+  'mist--secondary':             #2b76b9,
+  'mist--tertiary':              #2cacd1, 
+  'mist--quaternary':            #35eb93,
+  'midnight':                    #2A2E39,
+  'specter':                     #ECF0F1
 );
 
 @function barcamp-color($key: 'primary') {
   @return map-get($barcamp-colors, $key);
 }
 
-$teen-party:                      linear-gradient(to top, barcamp-color('teen-party--primary') 0%, barcamp-color('teen-party--secondary') 100%);
-$cotton-candy:                    linear-gradient(to right, #00dbde 0%, #fc00ff 100%);
-$sunset:                          linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%);
-$mist:                            linear-gradient(60deg, #3d3393 0%, #2b76b9 37%, #2cacd1 65%, #35eb93 100%);
+$teen-party:                      linear-gradient(barcamp-color('teen-party--primary') 0%, barcamp-color('teen-party--secondary') 100%);
+$cotton-candy:                    linear-gradient(barcamp-color('cotton-candy--primary') 0%, barcamp-color('cotton-candy--secondary') 100%);
+$sunset:                          linear-gradient(barcamp-color('sunset--primary') 0%, barcamp-color('sunset--secondary') 30%, barcamp-color('sunset--tertiary') 60%, barcamp-color('sunset--quaternary') 100%);
+$mist:                            linear-gradient(barcamp-color('mist--primary') 0%, barcamp-color('mist--secondary') 30%, barcamp-color('mist--tertiary') 60%, barcamp-color('mist--quaternary') 100%);
 
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);

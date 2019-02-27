@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
   </head>
-  <body class="one two three">
+  <body class="">
     <!-- <div class="grid-guides" style="display: none;">
       <div class="grid-guide">
           1
@@ -456,19 +456,21 @@
         </div>
       </footer>
     </div>
-    <!-- <button onclick="setTheme('cotton-candy')" style="position: fixed; top: 0; left: 0; ">Try it</button>
-    <button onclick="setTheme('teen-party')" style="position: fixed; top: 30px; left: 0; ">Try it</button>
-    <button onclick="setTheme('sunset')" style="position: fixed; top: 50px; left: 0; ">Try it</button>
-    <button onclick="setTheme('mist')" style="position: fixed; top: 70px; left: 0; ">Try it</button>
+    <ul class="themes">
+      <li><a href="#/" class="cotton-candy" onclick="setTheme('cotton-candy')">cotton candy theme</a></li>
+      <li><a href="#/" class="sunset" onclick="setTheme('sunset')">sunset theme</a></li>
+      <li><a href="#/" class="mist" onclick="setTheme('mist')">mist theme</a></li>
+      <li><a href="#/" class="teen-party" onclick="setTheme('teen-party')">teen party</a></li>
+    </ul>
     <script type="text/javascript">
       var body = document.body;
 
       function setTheme(theme) {
         body.classList = ""
         body.classList.add(theme);
+        return false;
       }
-
-    </script> -->
+    </script> 
   </body>
 </html>
 
