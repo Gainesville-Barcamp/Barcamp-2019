@@ -131,13 +131,13 @@ var reloadBrowser = function(done) {
 
 // Watch for changes
 var watchSource = function(done) {
-	watch(paths.input, series(exports.default, reloadBrowser));
+	watch(paths.input, series(exports.build, reloadBrowser));
 	done();
 };
 
-// Default task
-// gulp
-exports.default = series(
+// build task
+
+exports.build = series(
 	cleanDist,
 	parallel(
     processStyles,
@@ -150,7 +150,7 @@ exports.default = series(
 // Watch and reload
 // gulp watch
 exports.watch = series(
-	exports.default,
+	exports.build,
 	startServer,
 	watchSource
 );
