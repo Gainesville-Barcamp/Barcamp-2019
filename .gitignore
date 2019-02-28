@@ -2,9 +2,9 @@
 .DS_Store
 
 # Ignore compiled assets and views
-/assets/images/*
-/assets/javascripts/*
-/assets/stylesheets/*
+assets/images/*
+assets/css/*
+assets/js/*
 index.html
 
 # Ignore output css
@@ -19,6 +19,3 @@ npm-debug.log
 
 # Ignore files that get auto filled
 scss/_*.scss
-
-
-
