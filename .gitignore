@@ -1,10 +1,11 @@
 # Ignore Mac files
 .DS_Store
 
-# Ignore compiled assets
-assets/images/*
-assets/javascripts/*
-assets/stylesheets/*
+# Ignore compiled assets and views
+/assets/images/*
+/assets/javascripts/*
+/assets/stylesheets/*
+index.html
 
 # Ignore output css
 css/*.map
@@ -19,7 +20,5 @@ npm-debug.log
 # Ignore files that get auto filled
 scss/_*.scss
 
-# Ignore dist directory
 
-dist/
-dist/*
+

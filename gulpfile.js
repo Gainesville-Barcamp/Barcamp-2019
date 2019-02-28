@@ -7,21 +7,21 @@ var paths = {
 	output: 'dist/',
 	scripts: {
 		input: 'src/js/*',
-		output: 'dist/assets/js/'
+		output: './assets/js/'
 	},
 	styles: {
 		input: 'src/sass/**/*.{scss,sass}',
-		output: 'dist/assets/css/'
+		output: './assets/css/'
 	},
 	images: {
 		input: 'src/images/*',
-		output: 'dist/assets/images/'
+		output: './assets/images/'
 	},
 	views: {
 		input: 'src/views/**/*',
-		output: 'dist/'
+		output: './'
 	},
-	reload: './dist/'
+	reload: './'
 };
 
 var { gulp, src, dest, watch, series, parallel} = require('gulp');
