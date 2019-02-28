@@ -325,6 +325,7 @@ Frequently asked questions
       position: relative;
       margin: $base-unit 0;
       padding: $base-unit*2;
+      background: barcamp-color('off-white');
       border: 1px solid barcamp-color('specter');
 
       &:before,
@@ -956,22 +957,22 @@ body.cotton-candy {
   }
 
   a {
-    color: barcamp-color('cotton-candy--primary');
+    color: barcamp-color('cotton-candy--secondary');
 
     &:before {
       transition: width .4s cubic-bezier(0.51, 0.18, 0, 0.88) .1s;
-      background: barcamp-color('cotton-candy--primary');
+      background: barcamp-color('cotton-candy--secondary');
     }
     
     &:after {
       transition: width .2s cubic-bezier(0.29, 0.18, 0.26, 0.83);
-      background: barcamp-color('cotton-candy--secondary');
+      background: barcamp-color('cotton-candy--primary');
     }
   }
 
   header.hero .btn {
-    color: barcamp-color('cotton-candy--primary');
-    border-color: barcamp-color('cotton-candy--primary');
+    color: barcamp-color('cotton-candy--secondary');
+    border-color: barcamp-color('cotton-candy--secondary');
     &:hover {
       border: 1px solid transparent;
     }
@@ -987,12 +988,12 @@ body.cotton-candy {
 
   .frequently-asked-question ul li:first-child:before,
   .frequently-asked-question ul:nth-child(2) li:last-child:before {
-    background: barcamp-color('cotton-candy--primary');
+    background: barcamp-color('cotton-candy--secondary');
   }
 
   .frequently-asked-question ul li:first-child:after,
   .frequently-asked-question ul:nth-child(2) li:last-child:after {
-    background: barcamp-color('cotton-candy-secondary');
+    background: barcamp-color('cotton-candy-primary');
   }
 
   .where-is-barcamp .location {

@@ -20,7 +20,8 @@ $barcamp-colors: (
   'mist--tertiary':              #2cacd1, 
   'mist--quaternary':            #35eb93,
   'midnight':                    #2A2E39,
-  'specter':                     #ECF0F1
+  'specter':                     #ECF0F1,
+  'off-white':                   #FBFCFD
 );
 
 @function barcamp-color($key: 'primary') {
