@@ -3,8 +3,9 @@
 git push origin master
 git checkout gh-pages
 git merge -v --no-edit master
-git add .
-git commit -m "Automatic asset commit."
-git push origin gh-pages
-git checkout master
-gulp build
+cp -a /dist/. /
+# git add .
+# git commit -m "Automatic asset commit."
+# git push origin gh-pages
+# git checkout master
+# gulp build
