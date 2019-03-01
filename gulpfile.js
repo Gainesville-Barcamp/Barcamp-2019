@@ -43,9 +43,6 @@ var imagemin = require("gulp-imagemin");
 // BrowserSync
 var browserSync = require('browser-sync');
 
-//Deploy
-var ghPages = require('gulp-gh-pages');
-
 // Remove pre-existing content from output folders
 var cleanDist = function(done) {
 	del.sync([
@@ -173,10 +170,4 @@ exports.watch = series(
 	exports.build,
 	startServer,
 	watchSource
-);
-
-// Deploy changes
-
-exports.deploy = series(
-	deploy
 );
