@@ -7,21 +7,21 @@ var paths = {
 	output: 'dist/',
 	scripts: {
 		input: 'src/js/*',
-		output: './assets/js/'
+		output: 'dist/assets/js/'
 	},
 	styles: {
 		input: 'src/sass/**/*.{scss,sass}',
-		output: './assets/css/'
+		output: 'dist/assets/css/'
 	},
 	images: {
 		input: 'src/images/*',
-		output: './assets/images/'
+		output: 'dist/assets/images/'
 	},
 	views: {
 		input: 'src/views/**/*',
-		output: './'
+		output: 'dist/'
 	},
-	reload: './'
+	reload: './dist/'
 };
 
 var { gulp, src, dest, watch, series, parallel} = require('gulp');
@@ -42,6 +42,9 @@ var imagemin = require("gulp-imagemin");
 
 // BrowserSync
 var browserSync = require('browser-sync');
+
+//Deploy
+var ghPages = require('gulp-gh-pages');
 
 // Remove pre-existing content from output folders
 var cleanDist = function(done) {
@@ -135,6 +138,23 @@ var watchSource = function(done) {
 	done();
 };
 
+
+//Process partials, copy views
+var processPartials = function(done) {
+  src('./src/views/*.tpl.html')
+  .pipe(fileinclude({ prefix: '@@'}))
+  .pipe(rename({ extname: "" }))
+  .pipe(rename({ extname: ".html" }))
+  .pipe(dest(paths.views.output));
+  done();
+};
+
+var deploy = function(done) {
+	console.log('deploying');
+	src('./dist/**/*').pipe(ghPages());
+	done();
+};
+
 // build task
 
 exports.build = series(
@@ -148,9 +168,15 @@ exports.build = series(
 );
 
 // Watch and reload
-// gulp watch
+
 exports.watch = series(
 	exports.build,
 	startServer,
 	watchSource
+);
+
+// Deploy changes
+
+exports.deploy = series(
+	deploy
 );
