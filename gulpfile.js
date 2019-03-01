@@ -43,13 +43,13 @@ var imagemin = require("gulp-imagemin");
 // BrowserSync
 var browserSync = require('browser-sync');
 
-// Remove pre-existing content from output folders
-var cleanDist = function(done) {
-	del.sync([
-		paths.output
-	]);
-	done();
-};
+// // Remove pre-existing content from output folders
+// var cleanDist = function(done) {
+// 	del.sync([
+// 		paths.output
+// 	]);
+// 	done();
+// };
 
 // Process, lint, and, minify Sass files
 var processStyles = function(done) {
@@ -138,7 +138,7 @@ var watchSource = function(done) {
 // build task
 
 exports.build = series(
-	cleanDist,
+	// cleanDist,
 	parallel(
     processStyles,
     processImages,
