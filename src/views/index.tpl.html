@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
   </head>
-  <body class="">
+  <body class="teen-party">
     <div class="container">
       <ul class="themes">
         <li><a href="#/" class="cotton-candy" onclick="setTheme('cotton-candy')">cotton candy theme</a></li>
@@ -23,7 +23,12 @@
         <li><a href="#/" class="teen-party" onclick="setTheme('teen-party')">teen party</a></li>
       </ul>
       <header class="hero">
-        <a href="/" class="logo">BarCamp GNV</a>
+        <div class="logo">
+          <span class="teen-party"></span>
+          <span class="cotton-candy"></span>
+          <span class="sunset"></span>
+          <span class="mist"></span>
+        </div>
         <h1>
           BarCamp GNV
           <small>Saturday, April 6th, 2019</small>
@@ -40,13 +45,33 @@
           BarCamp is FREE to attend, but your RSVP is really important
           so we can purchase enough food and t-shirts!
         </small>
-        <div class="photo photo--hero"></div>
+        <div class="photo--hero">
+          <div class="photo-themes">
+            <span class="teen-party"></span>
+            <span class="cotton-candy"></span>
+            <span class="sunset"></span>
+            <span class="mist"></span>
+            <img src="assets/images/photo-hero.jpg" alt="Attendee adding a talk">
+          </div>
+        </div>
       </header>
       <div class="what-is-barcamp--left">
-        <div class="photos-wrapper">
-          <div class="photo photo--001"></div>
-          <div class="photo photo--002"></div>
-        </div>
+          <div class="what-is-barcamp-photos">
+              <div class="photo-themes photo--002">
+                <span class="teen-party"></span>
+                <span class="cotton-candy"></span>
+                <span class="sunset"></span>
+                <span class="mist"></span>
+                <img src="assets/images/photo-002.jpg" alt="Talk: Upcycled Percussion">
+              </div>
+              <div class="photo-themes photo--001">
+                <span class="teen-party"></span>
+                <span class="cotton-candy"></span>
+                <span class="sunset"></span>
+                <span class="mist"></span>
+                <img src="assets/images/photo-001.jpg" alt="Talk: 3D printing as a hobby">
+              </div>
+          </div>
       </div>
       <div class="what-is-barcamp--right">
         <h2>What is BarCamp GNV?</h2>
@@ -193,7 +218,7 @@
         </div>
       </div>
       <div class="where-is-barcamp">
-        <div class="location">
+        <div class="location photo-themes">
           <div class="address">
             <h2>Location</h2>
             <a href="https://goo.gl/maps/XJEdEoes8u12">
@@ -202,12 +227,16 @@
             </a>
           </div>
           <iframe title="BarCamp GNV Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3467.408169216715!2d-82.33493948489414!3d29.649927882027505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e8a38fbeec6e73%3A0x206468743ea4e57!2sUF+Innovate+%7C+The+Hub!5e0!3m2!1sen!2sus!4v1550622987357" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <span class="teen-party"></span>
+          <span class="cotton-candy"></span>
+          <span class="sunset"></span>
+          <span class="mist"></span>
         </div>
       </div>
       <div class="our-tracks">
         <h2>Our Tracks</h2>
         <p>Select the track below that best fits your talk.</p>
-        <section>
+        <section class="photo-themes">
           <ul class="row">
             <li class="column">
               <b>Entrepreneur</b>
@@ -239,6 +268,10 @@
               </p>
             </li>
           </ul>
+          <span class="teen-party"></span>
+          <span class="cotton-candy"></span>
+          <span class="sunset"></span>
+          <span class="mist"></span>
         </section>
         <table>
           <thead>

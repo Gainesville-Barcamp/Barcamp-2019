@@ -2,10 +2,7 @@
 .DS_Store
 
 # Ignore compiled assets and views
-assets/images/*
-assets/css/*
-assets/js/*
-index.html
+dist
 
 # Ignore output css
 css/*.map
