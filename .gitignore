@@ -2,7 +2,11 @@
 .DS_Store
 
 # Ignore compiled assets and views
-dist
+assets
+assets/images
+assets/js
+assets/css
+index.html
 
 # Ignore output css
 css/*.map
@@ -16,3 +20,4 @@ npm-debug.log
 
 # Ignore files that get auto filled
 scss/_*.scss
+

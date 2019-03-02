@@ -4,28 +4,27 @@
 
 var paths = {
 	input: 'src/',
-	output: 'dist/',
+	output: './',
 	scripts: {
 		input: 'src/js/*',
-		output: 'dist/assets/js/'
+		output: './assets/js/'
 	},
 	styles: {
 		input: 'src/sass/**/*.{scss,sass}',
-		output: 'dist/assets/css/'
+		output: './assets/css/'
 	},
 	images: {
 		input: 'src/images/*',
-		output: 'dist/assets/images/'
+		output: './assets/images/'
 	},
 	views: {
 		input: 'src/views/**/*',
-		output: 'dist/'
+		output: './'
 	},
-	reload: './dist/'
+	reload: './'
 };
 
 var { gulp, src, dest, watch, series, parallel} = require('gulp');
-var del = require("del");
 var rename = require("gulp-rename");
 var newer = require("gulp-newer");
 var fileinclude = require('gulp-file-include');
@@ -42,14 +41,6 @@ var imagemin = require("gulp-imagemin");
 
 // BrowserSync
 var browserSync = require('browser-sync');
-
-// Remove pre-existing content from output folders
-var cleanDist = function(done) {
-	del.sync([
-		paths.output
-	]);
-	done();
-};
 
 // Process, lint, and, minify Sass files
 var processStyles = function(done) {
@@ -155,7 +146,6 @@ var deploy = function(done) {
 // build task
 
 exports.build = series(
-	cleanDist,
 	parallel(
     processStyles,
     processImages,
