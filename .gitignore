@@ -1,16 +1,6 @@
 # Ignore Mac files
 .DS_Store
 
-# Ignore compiled assets and views
-assets
-assets/images
-assets/js
-assets/css
-index.html
-
-# Ignore output css
-css/*.map
-
 # Ignore node modules
 node_modules
 npm-debug.log
@@ -20,4 +10,3 @@ npm-debug.log
 
 # Ignore files that get auto filled
 scss/_*.scss
-
