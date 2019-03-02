@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta property="og:url" content="http://gainesvillebarcamp.com/">
     <meta property="og:type" content="website">
     <meta property="og:title" content=">BarCamp GNV 2019 | Saturday, April 6th, 2019">
-    <meta property="og:image" content="http://gainesvillebarcamp.com/images/barcamp-share-image.jpg">
+    <meta property="og:image" content="http://gainesvillebarcamp.com/assets/images/barcamp-share-image.jpg">
     <meta property="og:description" content="BarCamp is a chance to network, learn something new, and communicate what you're most passionate about. Come one, come all. No boring talks to sift through in order to get to the good ones; the power is totally in your hands to hear what you're interested in!">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:site_name" content="BarCamp GNV 2019">
@@ -476,8 +476,24 @@
       function setTheme(theme) {
         body.classList = ""
         body.classList.add(theme);
+        var metaThemeColor = document.querySelector("meta[name=theme-color]");
+        
+        switch(theme) {
+          case "cotton-candy":
+            metaThemeColor.setAttribute("content", '#00dbde');
+            break;
+          case "sunset":
+            metaThemeColor.setAttribute("content", '#FF1361');
+            break;
+          case "mist":
+            metaThemeColor.setAttribute("content", '#35eb93');
+            break;
+          default:
+            metaThemeColor.setAttribute("content", '#cc208e');
+        }
         return false;
       }
+
     </script>
   </body>
 </html>
