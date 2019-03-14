@@ -818,22 +818,25 @@ Our Sessions
     &--sebastian-ellios .session_vr {
       background: barcamp-color('specter') url(../images/sebastian-ellios.jpg) no-repeat;
       background-size: cover;
-      background-position: -50px 0;
+      background-position: center;
     }
 
     &--aaron-feickert .session_vr {
       background: barcamp-color('specter') url(../images/aaron-feickert.jpg) no-repeat;
       background-size: cover;
-      background-position: -80px 0;
+      background-position: center;
+    }
+
+    &--usha-suryadevara .session_vr {
+      background: barcamp-color('specter') url(../images/usha-suryadevara.jpg) no-repeat;
+      background-size: cover;
+      background-position: center;
     }
 
 
   }
 
 }
-
-
-
 /*------------------------------
 Our Sponsors
 -------------------------------*/
