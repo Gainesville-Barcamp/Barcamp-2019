@@ -839,6 +839,18 @@ Our Sessions
       background-position: center;
     }
 
+    &--mark-oelke .session_vr {
+      background: barcamp-color('specter') url(../images/mark-oelke.jpg) no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    &--justin-doan .session_vr {
+      background: barcamp-color('specter') url(../images/justin-doan.jpg) no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
   }
 
 }
